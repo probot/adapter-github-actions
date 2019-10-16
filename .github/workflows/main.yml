@@ -1,0 +1,24 @@
+on:
+  [push, pull_request]
+
+name: Build
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
+    - name: Checkout
+      uses: actions/checkout@v1.0.0
+    - name: Install
+      run: |
+        npm ci
+    - name: Test
+      run: |
+        npm t
+
