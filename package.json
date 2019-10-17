@@ -1,6 +1,6 @@
 {
   "name": "probot-actions-adapter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An adapter that takes a Probot app and makes it compatible with GitHub Actions",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swinton/probot-actions-adapter.git"
+    "url": "git+https://github.com/probot/actions-adapter.git"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
