@@ -2,7 +2,7 @@
 
 > An adapter that takes a [Probot](https://probot.github.io/) app and makes it compatible with [GitHub Actions](https://github.com/features/actions)
 
-<a href="https://github.com/swinton/probot-actions-adapter"><img alt="GitHub Actions status" src="https://github.com/swinton/probot-actions-adapter/workflows/Build/badge.svg"></a>
+<a href="https://github.com/probot/actions-adapter"><img alt="GitHub Actions status" src="https://github.com/probot/actions-adapter/workflows/Build/badge.svg"></a>
 
 ## Installation
 
