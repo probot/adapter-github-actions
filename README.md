@@ -45,4 +45,11 @@ See [the documentation](https://help.github.com/en/articles/metadata-syntax-for-
 
 ## Caveats
 
-- TODO
+This adapter is designed to work well with Probot apps that are essentially stateless webhook handlers.
+
+A few other limitations exist:
+
+1. The adapter will _only_ work for Probot apps that receive webhook events that Actions also receives: https://help.github.com/en/articles/events-that-trigger-workflows
+1. The adapter will _only_ work for Probot apps with a permissions set that is less than, or equivalent to the permission set attached to the `GITHUB_TOKEN`: https://help.github.com/en/articles/virtual-environments-for-github-actions#token-permissions
+
+If that's you, then great! :rocket:
