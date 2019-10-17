@@ -7,11 +7,11 @@ const core = require('@actions/core');
 
 const { createProbot } = require('probot');
 
-module.exports = handler => {
+module.exports = (...handlers) => {
   // Setup Probot app
   const githubToken = process.env.GITHUB_TOKEN;
   const probot = createProbot({ githubToken });
-  probot.setup([handler]);
+  probot.setup(handlers);
 
   // Process the event
   const event = process.env.GITHUB_EVENT_NAME;
