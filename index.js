@@ -21,6 +21,6 @@ module.exports = (...handlers) => {
   core.debug(`Receiving event ${JSON.stringify(event)}`);
   probot.receive({ name: event, payload, id: uuid.v4() }).catch(err => {
     // setFailed logs the message and sets a failing exit code
-    core.setFailed(`Action failed with error ${err}`);
+    core.setFailed(`Action failed with error: ${err.message}`);
   });
 };

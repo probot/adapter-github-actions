@@ -4,6 +4,8 @@ jest.mock('probot');
 
 const uuid = require('uuid');
 
+const core = require('@actions/core');
+
 const { createProbot } = require('probot');
 
 const adapt = require('./index');
@@ -42,5 +44,13 @@ describe('probot-actions-adapter', () => {
     expect(createProbot).toHaveBeenCalledWith({ githubToken: 'GITHUB_TOKEN' });
     expect(probot.setup).toHaveBeenCalledWith(handlers);
     expect(probot.receive).toHaveBeenCalledWith({ id: 'uuid-v4', name: 'push', payload: { commits: [] } });
+  });
+
+  test('that failures are handled', async () => {
+    probot.receive = jest.fn(async () => {
+      throw new Error('oh noes');
+    });
+    await adapt(() => {});
+    expect(core.setFailed).toHaveBeenCalledWith('Action failed with error: oh noes');
   });
 });
