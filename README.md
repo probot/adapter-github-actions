@@ -52,7 +52,7 @@ See [the documentation](https://help.github.com/en/articles/metadata-syntax-for-
 
 ## Authentication
 
-Authentication is via the `GITHUB_TOKEN` secret provided by GitHub Actions, which should be exposed as an environment variable, `GITHUB_TOKEN`. This can be achieved via [`env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#env), [`jobs.<job_id>.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv), or [`jobs.<job_id>.steps.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv).
+Authentication is via [the `GITHUB_TOKEN` secret _automatically_ provided by GitHub](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token), which should be exposed as an environment variable, `GITHUB_TOKEN`. This can be achieved by including the appropriate [`env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#env), [`jobs.<job_id>.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv), or [`jobs.<job_id>.steps.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv) value in your workflow file.
 
 ### Example via `jobs.<job_id>.steps.env`
 
