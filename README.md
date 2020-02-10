@@ -52,8 +52,20 @@ See [the documentation](https://help.github.com/en/articles/metadata-syntax-for-
 
 ## Authentication
 
-```shell
-# TODO
+Authentication is via the `GITHUB_TOKEN` secret provided by GitHub Actions, which should be exposed as an environment variable, `GITHUB_TOKEN`. This can be achieved via [`env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#env), [`jobs.<job_id>.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv), or [`jobs.<job_id>.steps.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv).
+
+### Example via `jobs.<job_id>.steps.env`
+
+Include the following in your workflow file, when calling your Probot action:
+
+```yaml
+...
+steps:
+  - name: My probot action
+    ...
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+...
 ```
 
 ## Caveats
