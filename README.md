@@ -4,6 +4,13 @@
 
 <a href="https://github.com/probot/actions-adapter"><img alt="GitHub Actions status" src="https://github.com/probot/actions-adapter/workflows/Build/badge.svg"></a>
 
+## Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Authentication](#authentication)
+- [Caveats](#caveats)
+
 ## Installation
 
 ```shell
@@ -42,6 +49,24 @@ runs:
 ```
 
 See [the documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions) for `action.yml` syntax details.
+
+## Authentication
+
+Authentication is via [the `GITHUB_TOKEN` secret _automatically_ provided by GitHub](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token), which should be exposed as an environment variable, `GITHUB_TOKEN`. This can be achieved by including the appropriate [`env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#env), [`jobs.<job_id>.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv), or [`jobs.<job_id>.steps.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv) value in your workflow file.
+
+### Example via `jobs.<job_id>.steps.env`
+
+Include the following in your workflow file, when calling your Probot action:
+
+```yaml
+...
+steps:
+  - name: My probot action
+    ...
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+...
+```
 
 ## Caveats
 
