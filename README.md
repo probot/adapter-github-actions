@@ -4,6 +4,13 @@
 
 <a href="https://github.com/probot/actions-adapter"><img alt="GitHub Actions status" src="https://github.com/probot/actions-adapter/workflows/Build/badge.svg"></a>
 
+## Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Authentication](#authentication)
+- [Caveats](#caveats)
+
 ## Installation
 
 ```shell
@@ -42,6 +49,12 @@ runs:
 ```
 
 See [the documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions) for `action.yml` syntax details.
+
+## Authentication
+
+```shell
+# TODO
+```
 
 ## Caveats
 
