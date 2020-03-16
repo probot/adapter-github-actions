@@ -50,7 +50,7 @@ describe('probot-actions-adapter', () => {
     probot.receive = jest.fn(async () => {
       throw new Error('oh noes');
     });
-    await adapt(() => {});
+    await expect(adapt(() => {})).rejects.toThrow('oh noes');
     expect(core.setFailed).toHaveBeenCalledWith('Action failed with error: oh noes');
   });
 });
