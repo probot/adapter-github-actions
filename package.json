@@ -1,6 +1,6 @@
 {
   "name": "probot-actions-adapter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An adapter that takes a Probot app and makes it compatible with GitHub Actions",
   "main": "index.js",
   "types": "index.d.ts",
