@@ -21,7 +21,7 @@ npm i -S probot-actions-adapter
 
 1. Add an `action.js` to your Probot project, like [the one shown below](#example-actionjs)
 1. Add an `action.yml` to your Probot project, like [the one shown below](#example-actionyml)
-1. _Vendor in_ your `node_modules`, as [recommended by the official Actions documentation](https://help.github.com/en/articles/creating-a-javascript-action#commit-and-push-your-action-to-github)
+1. _Vendor in_ your `node_modules`, as [recommended by the official Actions documentation](https://help.github.com/en/articles/creating-a-javascript-action#commit-tag-and-push-your-action-to-github)
 1. Optional, but recommended, update your project's README with an example workflow showing how to consume your action
 
 ### Example `action.js`
