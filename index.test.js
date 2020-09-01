@@ -6,7 +6,7 @@ const uuid = require('uuid');
 
 const core = require('@actions/core');
 
-const { createProbot } = require('probot');
+const { Probot } = require('probot');
 
 const adapt = require('./index');
 
@@ -23,7 +23,7 @@ describe('probot-actions-adapter', () => {
       receive: jest.fn(async () => true)
     };
 
-    createProbot.mockImplementation(() => {
+    Probot.mockImplementation(() => {
       return probot;
     });
   });
@@ -32,7 +32,7 @@ describe('probot-actions-adapter', () => {
     const handler = () => {};
     await adapt(handler);
 
-    expect(createProbot).toHaveBeenCalledWith({ githubToken: 'GITHUB_TOKEN' });
+    expect(Probot).toHaveBeenCalledWith({ githubToken: 'GITHUB_TOKEN' });
     expect(probot.setup).toHaveBeenCalledWith([handler]);
     expect(probot.receive).toHaveBeenCalledWith({ id: 'uuid-v4', name: 'push', payload: { commits: [] } });
   });
@@ -41,7 +41,7 @@ describe('probot-actions-adapter', () => {
     const handlers = [() => {}, () => {}];
     await adapt(...handlers);
 
-    expect(createProbot).toHaveBeenCalledWith({ githubToken: 'GITHUB_TOKEN' });
+    expect(Probot).toHaveBeenCalledWith({ githubToken: 'GITHUB_TOKEN' });
     expect(probot.setup).toHaveBeenCalledWith(handlers);
     expect(probot.receive).toHaveBeenCalledWith({ id: 'uuid-v4', name: 'push', payload: { commits: [] } });
   });
