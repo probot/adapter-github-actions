@@ -1,6 +1,3 @@
-# Ignore package-lock.json, since this is not intended to be a "top-level" package
-package-lock.json
-
 # Logs
 logs
 *.log
