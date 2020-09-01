@@ -11,10 +11,7 @@
   "keywords": [],
   "author": "Steve Winton <stevewinton@gmail.com> (https://github.com/swinton)",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/probot/actions-adapter.git"
-  },
+  "repository": "https://github.com/probot/actions-adapter",
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -30,7 +27,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.1.3",
-    "probot": "^9.5.3",
+    "probot": "^10.1.1",
     "uuid": "^3.3.3"
   }
 }

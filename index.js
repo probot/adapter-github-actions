@@ -1,4 +1,3 @@
-process.env.DISABLE_STATS = 'true';
 process.env.DISABLE_WEBHOOK_EVENT_CHECK = 'true';
 
 const path = require('path');
@@ -6,12 +5,12 @@ const uuid = require('uuid');
 
 const core = require('@actions/core');
 
-const { createProbot } = require('probot');
+const { Probot } = require('probot');
 
 module.exports = (...handlers) => {
   // Setup Probot app
   const githubToken = process.env.GITHUB_TOKEN;
-  const probot = createProbot({ githubToken });
+  const probot = new Probot({ githubToken });
   probot.setup(handlers);
 
   // Process the event
