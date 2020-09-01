@@ -21,21 +21,21 @@ npm i -S probot-actions-adapter
 
 1. Add an `action.js` to your Probot project, like [the one shown below](#example-actionjs)
 1. Add an `action.yml` to your Probot project, like [the one shown below](#example-actionyml)
-1. _Vendor in_ your `node_modules`, as [recommended by the official Actions documentation](https://help.github.com/en/articles/creating-a-javascript-action#commit-tag-and-push-your-action-to-github)
+1. _Vendor in_ your `node_modules`, as [recommended by the official Actions documentation](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#commit-tag-and-push-your-action-to-github)
 1. Optional, but recommended, update your project's README with an example workflow showing how to consume your action
 
 ### Example `action.js`
 
 ```javascript
 // Require the adapter
-const adapt = require('probot-actions-adapter');
+const runProbot = require('probot-actions-adapter');
 
 // Require your Probot app's entrypoint, usually this is just index.js
-const probot = require('./index');
+const app = require('./index');
 
 // Adapt the Probot app for Actions
 // This also acts as the main entrypoint for the Action
-adapt(probot);
+runProbot(app);
 ```
 
 ### Example `action.yml`
@@ -48,11 +48,11 @@ runs:
   main: 'action.js'
 ```
 
-See [the documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions) for `action.yml` syntax details.
+See [the documentation](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions) for `action.yml` syntax details.
 
 ## Authentication
 
-Authentication is via [the `GITHUB_TOKEN` secret _automatically_ provided by GitHub](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token), which should be exposed as an environment variable, `GITHUB_TOKEN`. This can be achieved by including the appropriate [`env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#env), [`jobs.<job_id>.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv), or [`jobs.<job_id>.steps.env`](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv) value in your workflow file.
+Authentication is via [the `GITHUB_TOKEN` secret _automatically_ provided by GitHub](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token), which should be exposed as an environment variable, `GITHUB_TOKEN`. This can be achieved by including the appropriate [`env`](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#env), [`jobs.<job_id>.env`](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv), or [`jobs.<job_id>.steps.env`](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv) value in your workflow file.
 
 ### Example via `jobs.<job_id>.steps.env`
 
@@ -74,7 +74,7 @@ This adapter is designed to work well with Probot apps that are essentially stat
 
 A few other limitations exist:
 
-1. The adapter will _only_ work for Probot apps that receive webhook events that Actions also receives: https://help.github.com/en/articles/events-that-trigger-workflows
-1. The adapter will _only_ work for Probot apps with a permissions set that is less than, or equivalent to the permission set attached to the `GITHUB_TOKEN`: https://help.github.com/en/articles/virtual-environments-for-github-actions#token-permissions
+1. The adapter will _only_ work for Probot apps that receive webhook events that Actions also receives: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+1. The adapter will _only_ work for Probot apps with a permissions set that is less than, or equivalent to the permission set attached to the `GITHUB_TOKEN`: https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#token-permissions
 
 If that's you, then great! :rocket:
