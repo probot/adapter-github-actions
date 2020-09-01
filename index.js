@@ -1,4 +1,5 @@
 process.env.DISABLE_STATS = 'true';
+process.env.DISABLE_WEBHOOK_EVENT_CHECK = 'true';
 
 const path = require('path');
 const uuid = require('uuid');
