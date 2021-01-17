@@ -75,6 +75,6 @@ This adapter is designed to work well with Probot apps that are essentially stat
 A few other limitations exist:
 
 1. The adapter will _only_ work for Probot apps that receive webhook events that Actions also receives: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
-1. The adapter will _only_ work for Probot apps with a permissions set that is less than, or equivalent to the permission set attached to the `GITHUB_TOKEN`: https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#token-permissions
+1. The adapter will _only_ work for Probot apps with a permissions set that is less than, or equivalent to the permission set attached to the `GITHUB_TOKEN`: https://docs.github.com/en/actions/reference/authentication-in-a-workflow#permissions-for-the-github_token
 
 If that's you, then great! :rocket:
