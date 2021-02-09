@@ -10,7 +10,8 @@
   },
   "keywords": [
     "probot",
-    "probot-adapter"
+    "probot-adapter",
+    "github-actions"
   ],
   "author": "Steve Winton <stevewinton@gmail.com> (https://github.com/swinton)",
   "contributors": [
