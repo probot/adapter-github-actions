@@ -41,7 +41,9 @@ runs:
   main: "action.js"
 ```
 
-For an example Probot App published as GitHub Action, see https://github.com/probot/example-github-action#how-it-works
+**Important**: Your external dependencies will not be installed, you have to either vendor them in by committing the contents of the `node_modules` folder, or compile the code to a single executable script (recommended). See [GitHub's documentation](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#commit-tag-and-push-your-action-to-github)
+
+For an example Probot App that is continuously published as GitHub Action, see https://github.com/probot/example-github-action#readme
 
 ## How it works
 
