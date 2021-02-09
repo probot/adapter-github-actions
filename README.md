@@ -1,8 +1,8 @@
-# :electric_plug: `probot-actions-adapter`
+# :electric_plug: `@probot/adapter-github-actions`
 
-> An adapter that takes a [Probot](https://probot.github.io/) app and makes it compatible with [GitHub Actions](https://github.com/features/actions)
+> Adapter to run a [Probot](https://probot.github.io/) application function in [GitHub Actions](https://github.com/features/actions)
 
-<a href="https://github.com/probot/actions-adapter"><img alt="GitHub Actions status" src="https://github.com/probot/actions-adapter/workflows/Build/badge.svg"></a>
+<a href="https://github.com/probot/adapter-github-actions"><img alt="GitHub Actions status" src="https://github.com/probot/adapter-github-actions/workflows/Build/badge.svg"></a>
 
 ## Contents
 
@@ -14,7 +14,7 @@
 ## Installation
 
 ```shell
-npm i -S probot-actions-adapter
+npm install @probot/adapter-github-actions
 ```
 
 ## Usage
@@ -28,24 +28,24 @@ npm i -S probot-actions-adapter
 
 ```javascript
 // Require the adapter
-const runProbot = require('probot-actions-adapter');
+const { run } = require("@probot/adapter-github-actions");
 
-// Require your Probot app's entrypoint, usually this is just index.js
-const app = require('./index');
+// Require your Probot application function
+const app = require("./app");
 
 // Adapt the Probot app for Actions
 // This also acts as the main entrypoint for the Action
-runProbot(app);
+run(app);
 ```
 
 ### Example `action.yml`
 
 ```yaml
-name: 'Probot app name'
-description: 'Probot app description.'
+name: "Probot app name"
+description: "Probot app description."
 runs:
-  using: 'node12'
-  main: 'action.js'
+  using: "node12"
+  main: "action.js"
 ```
 
 See [the documentation](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions) for `action.yml` syntax details.

@@ -1,27 +1,56 @@
-process.env.DISABLE_WEBHOOK_EVENT_CHECK = 'true';
+const ProbotExports = require("probot");
+const pino = require("pino");
 
-const path = require('path');
-const uuid = require('uuid');
+const { transport } = require("./pino-transport-github-actions");
 
-const core = require('@actions/core');
+module.exports = { ...ProbotExports, run };
 
-const { Probot } = require('probot');
+async function run(app) {
+  const log = pino({}, transport);
 
-module.exports = (...handlers) => {
-  // Setup Probot app
-  const githubToken = process.env.GITHUB_TOKEN;
-  const probot = new Probot({ githubToken });
-  probot.setup(handlers);
+  const githubToken =
+    process.env.GITHUB_TOKEN ||
+    process.env.INPUT_GITHUB_TOKEN ||
+    process.env.INPUT_TOKEN;
 
-  // Process the event
-  const event = process.env.GITHUB_EVENT_NAME;
-  const payloadPath = process.env.GITHUB_EVENT_PATH;
-  // eslint-disable-next-line global-require, import/no-dynamic-require
-  const payload = require(path.resolve(payloadPath));
-  core.debug(`Receiving event ${JSON.stringify(event)}`);
-  return probot.receive({ name: event, payload, id: uuid.v4() }).catch(err => {
-    // setFailed logs the message and sets a failing exit code
-    core.setFailed(`Action failed with error: ${err.message}`);
-    throw err;
+  if (!githubToken) {
+    log.error(
+      "[probot/adapter-github-actions] a token must be passed as `env.GITHUB_TOKEN` or `with.GITHUB_TOKEN` or `with.token`, see https://github.com/probot/adapter-github-actions#usage"
+    );
+    return;
+  }
+
+  const envVariablesMissing = [
+    "GITHUB_RUN_ID",
+    "GITHUB_EVENT_NAME",
+    "GITHUB_EVENT_PATH",
+  ].filter((name) => !process.env[name]);
+
+  if (envVariablesMissing.length) {
+    log.error(
+      `[probot/adapter-github-actions] GitHub Action default environment variables missing: ${envVariablesMissing.join(
+        ", "
+      )}. See https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables`
+    );
+    return;
+  }
+
+  const probot = ProbotExports.createProbot({
+    overrides: {
+      githubToken,
+      log,
+    },
   });
-};
+
+  await probot.load(app);
+
+  return probot
+    .receive({
+      id: process.env.GITHUB_RUN_ID,
+      name: process.env.GITHUB_EVENT_NAME,
+      payload: require(process.env.GITHUB_EVENT_PATH),
+    })
+    .catch((error) => {
+      probot.log.error(error);
+    });
+}

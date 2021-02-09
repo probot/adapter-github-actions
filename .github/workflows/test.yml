@@ -1,15 +1,27 @@
-on:
-  [push, pull_request]
-
 name: Test
+on:
+  push: {}
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
-  build:
+  integration:
     runs-on: ubuntu-latest
+    # don't run integration tests on push unless it's the main branch
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     steps:
-    - name: Debug
-      run: echo '${{ toJson(github) }}'
-    - uses: actions/checkout@v2
-    - run: npm ci
-    - run: npm run lint  
-    - run: npm test
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm ci
+      - run: npm test
+  createComment:
+    runs-on: ubuntu-latest
+    # only run on push events
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm ci
+      - run: node test/app.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
