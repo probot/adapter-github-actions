@@ -1,5 +1,8 @@
 {
   "name": "@probot/adapter-github-actions",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0-development",
   "description": "Adapter to run a Probot application function in GitHub Actions",
   "main": "index.js",
