@@ -18,11 +18,11 @@ module.exports = (app) => {
 };
 ```
 
-Then in the entrypoint of your GitHub Action, require `@probot/github-action` instead of `probot`
+Then in the entrypoint of your GitHub Action, require `@probot/adapter-github-actions` instead of `probot`
 
 ```js
 // index.js
-const { run } = require("@probot/github-action");
+const { run } = require('@probot/adapter-github-actions')
 const app = require("./app");
 
 run(app).catch((error) => {
