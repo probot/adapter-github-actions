@@ -21,7 +21,7 @@
     "Gregor Martynus (https://github.com/gr2m)"
   ],
   "license": "ISC",
-  "repository": "https://github.com/probot/adapter-github-actions",
+  "repository": "github:probot/adapter-github-actions",
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3",
