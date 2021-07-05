@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+        with:
+          cache: npm
       - run: npm ci
       - run: npm test
   createComment:
@@ -21,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+        with:
+          cache: npm
       - run: npm ci
       - run: node test/fixtures/app.js
         env:
