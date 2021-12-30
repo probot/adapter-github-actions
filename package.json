@@ -31,7 +31,7 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "pino": "^6.11.0",
-    "probot": "^11.0.6",
+    "probot": "^12.1.4",
     "through2": "^4.0.2"
   }
 }
