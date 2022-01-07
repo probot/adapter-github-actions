@@ -96,7 +96,9 @@ describe("@probot/adapter-github-actions", () => {
     await run(app);
     process.stdout.write = origWrite;
 
-    expect(output[2].startsWith('::error::{"error":"nope"}%0A{%0A')).toBe(true);
+    expect(
+      output[2].startsWith('::error::Unknown error: {"error":"nope"}%0A{%0A')
+    ).toBe(true);
 
     expect(mock.activeMocks()).toStrictEqual([]);
   });
