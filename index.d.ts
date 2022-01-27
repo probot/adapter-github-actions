@@ -4,4 +4,4 @@ declare function run(
   probotApp: ApplicationFunction | ApplicationFunction[]
 ): Promise<void>;
 
-export = { run };
+export default run;
