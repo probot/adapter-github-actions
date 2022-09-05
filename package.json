@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "pino": "^6.11.0",
+    "pino": "^8.5.0",
     "probot": "^12.2.1",
     "through2": "^4.0.2"
   },
