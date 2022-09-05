@@ -33,10 +33,5 @@
     "pino": "^8.5.0",
     "probot": "^12.2.1",
     "through2": "^4.0.2"
-  },
-  "renovate": {
-    "extends": [
-      "github>octokit/.github"
-    ]
   }
 }
