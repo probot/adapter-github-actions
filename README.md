@@ -38,7 +38,7 @@ name: "Probot app name"
 description: "Probot app description."
 runs:
   using: "node12"
-  main: "action.js"
+  main: "index.js"
 ```
 
 **Important**: Your external dependencies will not be installed, you have to either vendor them in by committing the contents of the `node_modules` folder, or compile the code to a single executable script (recommended). See [GitHub's documentation](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#commit-tag-and-push-your-action-to-github)
