@@ -1,4 +1,4 @@
 // This is run by .github/workflows/test.yml
-const { run } = require("../index");
+import { run } from "../index.js";
 
 run(app);

@@ -1,11 +1,9 @@
-module.exports = app;
-
-const { relative } = require("path");
+import { relative } from "path";
 
 /**
  * @param {import('probot').Probot} app
  */
-async function app(app) {
+export default async function app(app) {
   app.log.debug("This is a debug message");
   app.log.info("This is an info message");
   app.log.warn("This is a warning message");

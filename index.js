@@ -1,11 +1,11 @@
-const ProbotExports = require("probot");
-const pino = require("pino");
+export * from "probot";
+import { createProbot } from "probot";
+import pino from "pino";
+import { readFileSync } from "node:fs";
 
-const { transport } = require("./pino-transport-github-actions");
+import { transport } from "./pino-transport-github-actions.js";
 
-module.exports = { ...ProbotExports, run };
-
-async function run(app) {
+export async function run(app) {
   const log = pino({}, transport);
 
   const githubToken =
@@ -35,7 +35,7 @@ async function run(app) {
     return;
   }
 
-  const probot = ProbotExports.createProbot({
+  const probot = createProbot({
     overrides: {
       githubToken,
       log,
@@ -48,7 +48,7 @@ async function run(app) {
     .receive({
       id: process.env.GITHUB_RUN_ID,
       name: process.env.GITHUB_EVENT_NAME,
-      payload: require(process.env.GITHUB_EVENT_PATH),
+      payload: JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH)),
     })
     .catch((error) => {
       probot.log.error(error);

@@ -1,9 +1,14 @@
-const nock = require("nock");
+import nock from "nock";
+import { describe, beforeEach, test, expect, vi } from "vitest";
+import { resolve, dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const { run } = require("../index");
-const app = require("./fixtures/app");
+import { run } from "../index.js";
+import app from "./fixtures/app.js";
 
 nock.disableNetConnect();
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe("@probot/adapter-github-actions", () => {
   beforeEach(() => {
@@ -13,7 +18,7 @@ describe("@probot/adapter-github-actions", () => {
     process.env.GITHUB_TOKEN = "token123";
     process.env.GITHUB_RUN_ID = "1";
     process.env.GITHUB_EVENT_NAME = "push";
-    process.env.GITHUB_EVENT_PATH = require.resolve("./fixtures/push.json");
+    process.env.GITHUB_EVENT_PATH = join(__dirname, "fixtures", "push.json");
 
     const mock = nock("https://api.github.com")
       .post(
@@ -29,9 +34,9 @@ describe("@probot/adapter-github-actions", () => {
       .reply(201, {});
 
     const output = [];
-    storeOutput = (data) => output.push(data);
+    const storeOutput = (data) => output.push(data);
     const origWrite = process.stdout.write;
-    process.stdout.write = jest.fn(storeOutput);
+    process.stdout.write = vi.fn(storeOutput);
     await run(app);
     process.stdout.write = origWrite;
     expect(output).toStrictEqual([
@@ -44,9 +49,9 @@ describe("@probot/adapter-github-actions", () => {
 
   test("GITHUB_TOKEN not set", async () => {
     const output = [];
-    storeOutput = (data) => output.push(data);
+    const storeOutput = (data) => output.push(data);
     const origWrite = process.stdout.write;
-    process.stdout.write = jest.fn(storeOutput);
+    process.stdout.write = vi.fn(storeOutput);
     await run(app);
     process.stdout.write = origWrite;
     expect(output).toStrictEqual([
@@ -58,9 +63,9 @@ describe("@probot/adapter-github-actions", () => {
     process.env.GITHUB_TOKEN = "token123";
 
     const output = [];
-    storeOutput = (data) => output.push(data);
+    const storeOutput = (data) => output.push(data);
     const origWrite = process.stdout.write;
-    process.stdout.write = jest.fn(storeOutput);
+    process.stdout.write = vi.fn(storeOutput);
     await run(app);
     process.stdout.write = origWrite;
     expect(output).toStrictEqual([
@@ -72,7 +77,7 @@ describe("@probot/adapter-github-actions", () => {
     process.env.GITHUB_TOKEN = "token123";
     process.env.GITHUB_RUN_ID = "1";
     process.env.GITHUB_EVENT_NAME = "push";
-    process.env.GITHUB_EVENT_PATH = require.resolve("./fixtures/push.json");
+    process.env.GITHUB_EVENT_PATH = join(__dirname, "fixtures", "push.json");
 
     const mock = nock("https://api.github.com")
       .post(
@@ -90,9 +95,9 @@ describe("@probot/adapter-github-actions", () => {
       });
 
     const output = [];
-    storeOutput = (data) => output.push(data);
+    const storeOutput = (data) => output.push(data);
     const origWrite = process.stdout.write;
-    process.stdout.write = jest.fn(storeOutput);
+    process.stdout.write = vi.fn(storeOutput);
     await run(app);
     process.stdout.write = origWrite;
 
@@ -107,12 +112,12 @@ describe("@probot/adapter-github-actions", () => {
     process.env.GITHUB_TOKEN = "token123";
     process.env.GITHUB_RUN_ID = "1";
     process.env.GITHUB_EVENT_NAME = "push";
-    process.env.GITHUB_EVENT_PATH = require.resolve("./fixtures/push.json");
+    process.env.GITHUB_EVENT_PATH = join(__dirname, "fixtures", "push.json");
 
     const output = [];
-    storeOutput = (data) => output.push(data);
+    const storeOutput = (data) => output.push(data);
     const origWrite = process.stdout.write;
-    process.stdout.write = jest.fn(storeOutput);
+    process.stdout.write = vi.fn(storeOutput);
     await run((app) => app.log.info({ level: "unknown" }, "oopsies"));
     process.stdout.write = origWrite;
 
