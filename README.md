@@ -10,7 +10,7 @@ Create your Probot Application as always
 
 ```js
 // app.js
-module.exports = (app) => {
+export default (app) => {
   app.on("issues.opened", async (context) => {
     const params = context.issue({ body: "Hello World!" });
     await context.octokit.issues.createComment(params);
@@ -22,8 +22,8 @@ Then in the entrypoint of your GitHub Action, require `@probot/adapter-github-ac
 
 ```js
 // index.js
-const { run } = require('@probot/adapter-github-actions')
-const app = require("./app");
+import { run } from "@probot/adapter-github-actions";
+import app from "./app.js";
 
 run(app).catch((error) => {
   console.error(error);
@@ -37,7 +37,7 @@ Then use `index.js` as your entrypoint in the `action.yml` file
 name: "Probot app name"
 description: "Probot app description."
 runs:
-  using: "node12"
+  using: "node20"
   main: "index.js"
 ```
 

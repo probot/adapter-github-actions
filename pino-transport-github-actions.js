@@ -1,8 +1,8 @@
-const { inspect } = require("util");
+import { inspect } from "util";
 
-const through = require("through2");
-const core = require("@actions/core");
-const pino = require("pino");
+import through from "through2";
+import core from "@actions/core";
+import pino from "pino";
 
 const LEVEL_TO_ACTIONS_CORE_LOG_METHOD = {
   trace: "debug",
@@ -13,7 +13,7 @@ const LEVEL_TO_ACTIONS_CORE_LOG_METHOD = {
   fatal: "error",
 };
 
-const transport = through.obj(function (chunk, enc, cb) {
+export const transport = through.obj(function (chunk, enc, cb) {
   const { level, hostname, pid, msg, time, ...meta } = JSON.parse(chunk);
   const levelLabel = pino.levels.labels[level] || level;
   const logMethodName = LEVEL_TO_ACTIONS_CORE_LOG_METHOD[levelLabel];
@@ -33,5 +33,3 @@ const transport = through.obj(function (chunk, enc, cb) {
 
   cb();
 });
-
-module.exports = { transport };
