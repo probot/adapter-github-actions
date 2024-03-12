@@ -1,6 +1,6 @@
 import nock from "nock";
 import { describe, beforeEach, test, expect, vi } from "vitest";
-import { resolve, dirname, join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { run } from "../index.js";
