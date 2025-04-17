@@ -65,4 +65,4 @@ For a more thorough comparison, see [@jasonetco's](https://github.com/jasonetco)
 
 ## License
 
-[ISC](LICENSE)
+[ISC](LICENSE.md)
