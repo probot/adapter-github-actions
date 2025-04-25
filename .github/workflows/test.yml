@@ -19,6 +19,9 @@ jobs:
       - run: npm test
   createComment:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
