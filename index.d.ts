@@ -4,4 +4,5 @@ declare function run(
   probotApp: ApplicationFunction | ApplicationFunction[]
 ): Promise<void>;
 
-export = { run };
+export { run };
+export * from "probot";
