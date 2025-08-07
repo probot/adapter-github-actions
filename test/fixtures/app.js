@@ -1,4 +1,4 @@
-import { relative } from "path";
+import { relative } from "node:path";
 
 /**
  * @param {import('probot').Probot} app
